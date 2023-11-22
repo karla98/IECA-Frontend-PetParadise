@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/partial/vars';
+
+body{
+    background-color: $color-light;
+}
+
+@font-face {
+    font-family: 'LilitaOne'; 
+    src: url('./assets/fonts/LilitaOne-Regular.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  h2, h3{
+    font-family: 'LilitaOne', sans-serif;
+    color: $dark-green;
+    text-align: center;
+  }
+
+  section{
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .area-texto{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
