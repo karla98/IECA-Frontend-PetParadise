@@ -1,0 +1,20 @@
+.hero-area {
+    // position: relative;
+    width: 100vw;
+    height: 500px;
+    background-color: rgb(37, 88, 71);
+}
+
+@media (max-width: 767px) {
+    .hero-area {
+        overflow: hidden;
+    }
+}
+
+.hero-area h2 {
+    position: relative;
+    z-index: 2;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
