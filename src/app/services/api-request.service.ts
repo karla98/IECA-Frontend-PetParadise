@@ -24,12 +24,13 @@ export class ApiRequestService {
 
   private getHeaders(): HttpHeaders {
     let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
+   /* const token = localStorage.getItem('token');
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
     console.log('token: ', headers);
+    */
     return headers;
   }
 
