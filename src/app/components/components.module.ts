@@ -4,14 +4,15 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MascotasSectionComponent } from './mascotas-section/mascotas-section.component';
-
+import { UploaderComponent } from './uploader/uploader.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
-    MascotasSectionComponent
+    MascotasSectionComponent,
+    UploaderComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +22,8 @@ import { MascotasSectionComponent } from './mascotas-section/mascotas-section.co
     NavbarComponent,
     FooterComponent,
     MascotasSectionComponent,
+    UploaderComponent,
+    
   ]
 })
 export class ComponentsModule { }
