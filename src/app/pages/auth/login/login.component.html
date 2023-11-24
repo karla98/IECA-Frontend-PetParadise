@@ -1,13 +1,24 @@
-<form class="auth-form">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+<form class="auth-form" [formGroup]="this.formGroup">
+    <div class="mb-3 form-group">
+        <i class="bi bi-envelope form-control-feedback"></i>
+        <input id="email" formControlName="email" placeholder="Email" type="email" class="form-control" autocomplete="off">
+        <div *ngIf="formGroup.get('email')?.hasError('required') && formGroup.get('email')?.touched" class="error-message">
+            Campo requerido
+        </div>
+        <div *ngIf="formGroup.get('email')?.hasError('email')" class="error-message">
+            Email con formato inválido
+        </div>
     </div>
 
-    <button type="submit" class="btn auth-btn-custom ">Submit</button>
+    <div class="mb-3 form-group">
+        <i class="bi bi-lock form-control-feedback"></i>
+        <input id="password" formControlName="password" placeholder="Password" type="password" class="form-control" autocomplete="off">
+        <div *ngIf="formGroup.get('password')?.hasError('required') && formGroup.get('password')?.touched" class="error-message">
+            Campo requerido
+        </div>
+        <div *ngIf="formGroup.get('password')?.hasError('minlength')" class="error-message">
+            La contraseña debe contener al menos 8 caracteres
+        </div>
+    </div>
+    <button (click)="onSubmit()" class="btn auth-btn-custom">Submit</button>
 </form>
