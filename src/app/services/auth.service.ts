@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string; password: string }) {
-    return this.http.post(`${environment.SERVER_URL}/login`, credentials).pipe(
+    return this.http.post(`${environment.SERVER_URL}/usuarios/login`, credentials).pipe(
       tap((response: any) => {
         if (response && response.token) {
           // Guardar el token en el localStorage
@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post(`${environment.SERVER_URL}/logout`, {});
+    return this.http.post(`${environment.SERVER_URL}/usuarios/logout`, {});
   }
 
   isAuthenticated(): boolean {

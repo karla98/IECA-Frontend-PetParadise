@@ -1,1 +1,22 @@
-<p>template works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/auth/register" routerLinkActive="active">Register</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card-body">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

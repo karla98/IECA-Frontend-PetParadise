@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TemplateComponent } from './template/template.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { TemplateComponent } from './template/template.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    TabsModule.forRoot(),
   ]
 })
 export class AuthModule { }
