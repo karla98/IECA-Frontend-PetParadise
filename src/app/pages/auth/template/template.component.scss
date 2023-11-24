@@ -1,0 +1,35 @@
+@import '../../../../assets/partial/vars';
+
+.auth {
+    height: 100vh;
+    background-image: url('../../../../assets/images/mascotas/background-auth.jpg');
+    background-size: cover;
+}
+
+.card {
+    background-color: $light-green !important;
+    height: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    padding: 0 !important;
+    border-bottom: 0 !important;
+
+}
+
+.card-body {
+    background-color: transparent !important;
+    padding-top: 40px !important;
+    padding-bottom: 30px !important;
+}
+
+.nav-link {
+    color: $light-gray !important;
+    background-color: transparent;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: transparent !important;
+    color: white !important;
+}
