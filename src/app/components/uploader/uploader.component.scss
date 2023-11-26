@@ -99,3 +99,25 @@
     color: $dark-red;
     margin-left: 10px;
 }
+
+/* ------------------------------------- */
+.custom-file-upload-isPerfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border: 5px dotted $dark-gray;
+    padding: 10px;
+    color: $dark-gray;
+    font-size: 15px;
+
+    i{
+        font-size: 20px;
+    }
+}
+
+.custom-file-upload-isPerfil:hover {
+    border: 5px dotted $orange;
+}

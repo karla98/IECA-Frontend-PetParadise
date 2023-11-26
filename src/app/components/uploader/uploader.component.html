@@ -1,11 +1,28 @@
-<div class="uploader-container" *ngIf="!loadingPreviews">
+<div class="uploader-container" *ngIf="!loadingPreviews && !this.isImgPerfil">
     <label for="fileInput" class="custom-file-upload">
         <input id="fileInput" type="file" multiple (change)="handleFileChange($event)" accept="image/*"
             style="display:none" />
         Subir Imágenes
     </label>
-    <span class="error-numMaxFiles" *ngIf="this.numMaxFiles">No se permite subir más de 3 imagenes</span>
+    <span class="error-numMaxFiles" *ngIf="this.numMaxFiles">No se permite subir más de 3 imágenes</span>
     <div class="preview" *ngIf="previews">
+        <div *ngFor="let preview of previews; let i = index" class="files-list">
+            <div class="overlay">
+                <i class="bi bi-trash3" (click)="deleteImage(i)"></i>
+            </div>
+            <img [src]="preview" />
+        </div>
+    </div>
+</div>
+
+<div class="uploader-container" *ngIf="!loadingPreviews && this.isImgPerfil">
+    <label for="fileInputIsPerfil" class="custom-file-upload-isPerfil" *ngIf="this.previews.length==0">
+        <input id="fileInputIsPerfil" type="file" (change)="handleFileChange($event)" accept="image/*"
+            style="display:none" />
+            <i class="bi bi-plus"></i>
+        Subir Imágen
+    </label>
+    <div class="preview" *ngIf="this.previews">
         <div *ngFor="let preview of previews; let i = index" class="files-list">
             <div class="overlay">
                 <i class="bi bi-trash3" (click)="deleteImage(i)"></i>
@@ -19,4 +36,4 @@
     <div class="spinner-border" role="status">
         <span class="visually-hidden">Cargando...</span>
     </div>
-</div>
+</div> 

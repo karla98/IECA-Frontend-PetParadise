@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-uploader',
@@ -8,13 +8,19 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class UploaderComponent implements OnInit {
   @Output() filesSelected: EventEmitter<File[]> = new EventEmitter<File[]>();
 
+  @Input() isImgPerfil: boolean = false;
+
   previews: any[] = [];
   loadingPreviews = false;
   fileList: File[] = [];
   numMaxFiles: boolean = false;
+  numFiles: number = 0;
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.numFiles = (this.isImgPerfil) ? 1 : 3;
+
+  }
 
   async handleFileChange(event: any): Promise<void> {
     const files = event?.target?.files;
@@ -32,7 +38,7 @@ export class UploaderComponent implements OnInit {
       try {
         const base64Results = await Promise.all(promises);
         this.previews = this.previews.concat(base64Results);
-        if (this.fileList.length <= 3) {
+        if (this.fileList.length <= this.numFiles) {
           this.numMaxFiles = false;
           this.filesSelected.emit(this.fileList);
         } else {
@@ -61,7 +67,7 @@ export class UploaderComponent implements OnInit {
   deleteImage(index: number): void {
     this.previews.splice(index, 1);
     this.fileList.splice(index, 1);
-    if (this.fileList.length <= 3) {
+    if (this.fileList.length <= this.numFiles) {
       this.numMaxFiles=false;
       this.filesSelected.emit(this.fileList);
     } else {

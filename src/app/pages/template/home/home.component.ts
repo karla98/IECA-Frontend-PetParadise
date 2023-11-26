@@ -88,6 +88,7 @@ export class HomeComponent implements OnInit {
     for (const file of files) {
       formData.append('imagenes', file, file.name);
     }
+    /*
   if(files && files.length>0){
     try {
     await lastValueFrom(
@@ -102,7 +103,7 @@ export class HomeComponent implements OnInit {
       });
     }
 
-  }
+  }*/
     
     
   }
