@@ -16,10 +16,12 @@ export class UploaderComponent implements OnInit {
   numMaxFiles: boolean = false;
   numFiles: number = 0;
 
+  maxFileSize: number = 1024 * 1024 * 2; // 2 MB
+
+  exceededSize: boolean = false;
 
   ngOnInit(): void {
-    this.numFiles = (this.isImgPerfil) ? 1 : 3;
-
+    this.numFiles = this.isImgPerfil ? 1 : 3;
   }
 
   async handleFileChange(event: any): Promise<void> {
@@ -30,9 +32,14 @@ export class UploaderComponent implements OnInit {
       const promises: Promise<string | ArrayBuffer | null>[] = [];
 
       for (const file of files) {
-        const base64Result = await this.getBase64(file);
-        promises.push(Promise.resolve(base64Result));
-        this.fileList.push(file);
+        if (file.size <= this.maxFileSize) {
+          this.exceededSize = false;
+          const base64Result = await this.getBase64(file);
+          promises.push(Promise.resolve(base64Result));
+          this.fileList.push(file);
+        } else {
+          this.exceededSize = true;
+        }
       }
 
       try {
@@ -68,7 +75,7 @@ export class UploaderComponent implements OnInit {
     this.previews.splice(index, 1);
     this.fileList.splice(index, 1);
     if (this.fileList.length <= this.numFiles) {
-      this.numMaxFiles=false;
+      this.numMaxFiles = false;
       this.filesSelected.emit(this.fileList);
     } else {
       this.numMaxFiles = true;

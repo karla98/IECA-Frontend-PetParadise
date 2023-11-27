@@ -5,6 +5,7 @@
         Subir Imágenes
     </label>
     <span class="error-numMaxFiles" *ngIf="this.numMaxFiles">No se permite subir más de 3 imágenes</span>
+    <span class="error-numMaxFiles" *ngIf="this.exceededSize">Las imágenes no deben exceder los 2MB c/u</span>
     <div class="preview" *ngIf="previews">
         <div *ngFor="let preview of previews; let i = index" class="files-list">
             <div class="overlay">
@@ -20,8 +21,9 @@
         <input id="fileInputIsPerfil" type="file" (change)="handleFileChange($event)" accept="image/*"
             style="display:none" />
             <i class="bi bi-plus"></i>
-        Subir Imágen
+        Subir Imagen
     </label>
+    <span class="error-numMaxFiles" *ngIf="this.exceededSize">La imagen es muy pesada</span>
     <div class="preview" *ngIf="this.previews">
         <div *ngFor="let preview of previews; let i = index" class="files-list">
             <div class="overlay">
