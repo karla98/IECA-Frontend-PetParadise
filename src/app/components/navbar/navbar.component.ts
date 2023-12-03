@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
         console.log('User logged: ', this.userLogged);
 
-        this.userLogged.imagen = '';
+        //this.userLogged.imagen = '';
   
       
       } catch (e) {
