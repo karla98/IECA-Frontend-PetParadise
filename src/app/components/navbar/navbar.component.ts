@@ -9,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -32,11 +33,12 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   assets_path = environment.ASSET_URL;
 
+  isAuthenticated = false;
+
   constructor(
     private router: Router,
     public location: Location,
-    private element: ElementRef,
-    private renderer: Renderer2
+    private auth: AuthService,
   ) {
     this.checkScreenWidth();
   }
@@ -51,6 +53,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         console.log('NO ES HOME ONINIT: ', this.router.url);
       }
     });
+    
+    this.isAuthenticated = this.auth.isAuthenticated();
   }
 
   ngAfterViewInit() {
