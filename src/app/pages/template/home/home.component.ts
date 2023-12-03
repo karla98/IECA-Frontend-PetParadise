@@ -11,11 +11,16 @@ import { ApiRequestService } from 'src/app/services/api-request.service';
 })
 export class HomeComponent implements OnInit {
   /* Pruebas de peticiones al backend */
-  formulario: FormGroup;
+  //formulario: FormGroup;
 
   isLoading: boolean = true;
 
-  constructor(private apiRequestService: ApiRequestService, private message: ToastrService, private zone: NgZone) {
+  constructor(
+    private apiRequestService: ApiRequestService,
+    private message: ToastrService,
+    private zone: NgZone
+  ) {
+    /*
     this.formulario = new FormGroup({
       nombre: new FormControl('Prueba', []),
       descripcion: new FormControl('descripción de prueba', []),
@@ -25,6 +30,7 @@ export class HomeComponent implements OnInit {
       propietario: new FormControl('655ad13f4048edacbbabf752', []),
       imagenes: new FormArray([]),
     });
+*/
   }
 
   async ngOnInit(): Promise<void> {
@@ -74,8 +80,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /*
+    -----  Prueba subir imagenes de mascotas ---------
+
   async onFileSelected(files: File[]): Promise<void> {
-   /* ---------- Prueba de subir imagenes ------------------------- */
 
     const formData = new FormData();
     formData.append('nombre', this.formulario.value.nombre);
@@ -88,23 +96,44 @@ export class HomeComponent implements OnInit {
     for (const file of files) {
       formData.append('imagenes', file, file.name);
     }
-    /*
-  if(files && files.length>0){
-    try {
-    await lastValueFrom(
-      this.apiRequestService.createWithFile<any>('mascotas', formData)
-    );
-    } catch (error) {
-      console.error('Error al cargar imágenes:', error);
 
-      // Muestra el mensaje de error dentro de la zona de Angular
-      this.zone.run(() => {
-        this.message.error('Error al cargar imágenes');
-      });
+    if (files && files.length > 0) {
+      try {
+        await lastValueFrom(
+          this.apiRequestService.createWithFile<any>('mascotas', formData)
+        );
+      } catch (error) {
+        console.error('Error al cargar imágenes:', error);
+
+        // Muestra el mensaje de error dentro de la zona de Angular
+        this.zone.run(() => {
+          this.message.error('Error al cargar imágenes');
+        });
+      }
+    }
+  }*/
+
+  //Prueba subir imagen de perfil
+
+  async onFileSelected(files: File[]): Promise<void> {
+    const formData = new FormData();
+    for (const file of files) {
+      formData.append('imagen', file, file.name);
     }
 
-  }*/
-    
-    
+    if (files && files.length > 0) {
+      try {
+        await lastValueFrom(
+          this.apiRequestService.createWithFile<any>('perfil', formData)
+        );
+      } catch (error) {
+        console.error('Error al cargar imágenes:', error);
+
+        // Muestra el mensaje de error dentro de la zona de Angular
+        this.zone.run(() => {
+          this.message.error('Error al cargar imágenes');
+        });
+      }
+    }
   }
 }
