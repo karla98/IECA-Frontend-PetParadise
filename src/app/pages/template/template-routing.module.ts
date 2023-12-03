@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MascotasComponent } from './mascotas/mascotas.component';
 import { TipsComponent } from './tips/tips.component';
-import { EventosComponent } from './eventos/eventos.component';
 import { TemplateComponent } from './template/template.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
 
       { path: 'mascotas', component: MascotasComponent, data: { title: 'Mascotas' } },
        { path: 'tips', component: TipsComponent, data: { title: 'Tips' } },
-       { path: 'eventos', component: EventosComponent, data: { title: 'Eventos' } },
+       { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil' } },
      
        { path: '**', redirectTo: '' },      
 

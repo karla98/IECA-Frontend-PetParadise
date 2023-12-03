@@ -8,6 +8,7 @@ import { MascotasComponent } from './mascotas/mascotas.component';
 import { TipsComponent } from './tips/tips.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { TemplateComponent } from './template/template.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TemplateComponent } from './template/template.component';
     MascotasComponent,
     TipsComponent,
     EventosComponent,
-    TemplateComponent
+    TemplateComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
