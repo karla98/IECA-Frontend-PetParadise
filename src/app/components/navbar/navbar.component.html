@@ -24,7 +24,12 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/home/tips" routerLinkActive="active">Tips</a>
             </li>
-            <li *ngIf="this.isAuthenticated" class="nav-item">
+            <li *ngIf="this.isAuthenticated" class="nav-item nav-item-perfil">
+              <img *ngIf="this.userLogged.imagen && this.userLogged.imagen != ''" [src]="this.userLogged.imagen" class="user-avatar">
+              <span *ngIf="!(this.userLogged.imagen && this.userLogged.imagen != '')" class="user-avatar user-avatar-span">
+                <i  class="bi bi-person-circle user-avatar-default"></i>
+              </span>
+              
               <a class="nav-link" routerLink="/home/perfil" routerLinkActive="active">Perfil</a>
             </li>
             <li *ngIf="!this.isAuthenticated" class="nav-item">

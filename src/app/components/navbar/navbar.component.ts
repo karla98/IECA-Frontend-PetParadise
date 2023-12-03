@@ -9,6 +9,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { ApiRequestService } from 'src/app/services/api-request.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
@@ -24,7 +26,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   isWidthResponsive: boolean = false;
   isExpandedNavBarResponsivo: boolean = false;
-
+ 
   scrollPage = false;
   scrollPageMax = false;
 
@@ -34,16 +36,18 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   assets_path = environment.ASSET_URL;
 
   isAuthenticated = false;
+  userLogged: any = null;
 
   constructor(
     private router: Router,
     public location: Location,
     private auth: AuthService,
+    private apiRequestService: ApiRequestService,
   ) {
     this.checkScreenWidth();
   }
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.router.events.subscribe((val) => {
       if (this.router.url === '/home') {
         this.isHome = true;
@@ -55,6 +59,21 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     });
     
     this.isAuthenticated = this.auth.isAuthenticated();
+
+    try {
+        this.userLogged = await lastValueFrom(
+          this.apiRequestService.getAllWithAuth<any[]>('perfil')
+        );
+
+        console.log('User logged: ', this.userLogged);
+
+        this.userLogged.imagen = '';
+  
+      
+      } catch (e) {
+      } finally {
+      }
+
   }
 
   ngAfterViewInit() {

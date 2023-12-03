@@ -82,6 +82,23 @@ export class ApiRequestService {
       .pipe(catchError(this.handleError.bind(this)));
   }
 
+  getAllWithAuth<T>(
+    endpoint: string,
+    queryParams?: { [key: string]: any }
+  ): Observable<T[]> {
+    let params = new HttpParams();
+
+    if (queryParams) {
+      Object.keys(queryParams).forEach((key) => {
+        params = params.set(key, queryParams[key]);
+      });
+    }
+
+    return this.http
+      .get<T[]>(`${API}/${endpoint}`, {headers: this.getHeaders(), params})
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
   getOne<T>(endpoint: string, id: string | number): Observable<T> {
     return this.http
       .get<T>(`${API}/${endpoint}/${id}`)
