@@ -35,6 +35,9 @@
             <li *ngIf="!this.isAuthenticated" class="nav-item">
               <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Login</a>
             </li>
+            <li *ngIf="this.isAuthenticated" class="nav-item">
+              <a class="nav-link" (click)="Logout()" routerLinkActive="active">Logout</a>
+            </li>
           </ul>
         </div>
       </div>

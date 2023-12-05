@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -20,8 +20,24 @@ export class AuthService {
     );
   }
 
+  save(credentials: { email: string; password: string, name: string }) {
+    return this.http.post(`${environment.SERVER_URL}/usuarios/save`, credentials).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          console.log(response);
+        }
+      })
+    );
+  }
+
   logout() {
-    return this.http.post(`${environment.SERVER_URL}/usuarios/logout`, {});
+    const token = localStorage.getItem("token");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(`${environment.SERVER_URL}/usuarios/logout`, {}, { headers });
+
   }
 
   isAuthenticated(): boolean {

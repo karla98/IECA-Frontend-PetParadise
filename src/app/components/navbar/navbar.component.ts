@@ -75,7 +75,17 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       }
 
   }
-
+  async Logout():Promise<void>{
+    this.auth.logout().subscribe({
+      next:(response:any) => {
+        localStorage.removeItem('token');
+        document.location = "";
+      },
+      error(err) {
+          console.log(err);
+      },
+    });
+  }
   ngAfterViewInit() {
     if (this.isWidthResponsive && this.navButtonResponsivo?.nativeElement) {
       const buttonElement = this.navButtonResponsivo.nativeElement;
