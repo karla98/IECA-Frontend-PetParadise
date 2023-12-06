@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
         next: (response: any) => {
           setTimeout(() => {
             this.message.success("usuario registrado con éxito");
-            this.router.navigate(["login"]);
+            this.router.navigate(["auth/login"]);
           }, 1000);
         },
         error: (error) => {
