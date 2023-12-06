@@ -1,10 +1,27 @@
-<section class="hero-area">
-    <div class="area-texto">
-        <h2>HERO AREA</h2>
-    </div>
-</section>
+<carousel id="home-carousel">
+    <slide>
+        <img [src]="this.ASSETS + '/mascotas/carrusel-1.jpg'" alt="first slide" class="carrusel-img">
+        <div class="carousel-caption d-none d-md-block">
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+    </slide>
+    <slide>
+        <img [src]="this.ASSETS + '/mascotas/carrusel-2.jpg'" alt="second slide" class="carrusel-img">
+        <div class="carousel-caption d-none d-md-block">
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </slide>
+    <slide>
+        <img [src]="this.ASSETS + '/mascotas/carrusel-3.jpg'" alt="third slide" class="carrusel-img">
+        <div class="carousel-caption d-none d-md-block">
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </div>
+    </slide>
+</carousel>
 
 <app-mascotas-section></app-mascotas-section>
 
 <app-uploader [isImgPerfil]="true" (filesSelected)="onFileSelected($event)"></app-uploader>
-

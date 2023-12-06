@@ -9,7 +9,7 @@ import { TipsComponent } from './tips/tips.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { TemplateComponent } from './template/template.component';
 import { PerfilComponent } from './perfil/perfil.component';
-
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -18,12 +18,13 @@ import { PerfilComponent } from './perfil/perfil.component';
     TipsComponent,
     EventosComponent,
     TemplateComponent,
-    PerfilComponent
+    PerfilComponent,
   ],
   imports: [
     CommonModule,
     TemplateRoutingModule,
     ComponentsModule,
+    CarouselModule.forRoot(),
   ]
 })
 export class TemplateModule { }

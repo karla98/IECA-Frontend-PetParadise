@@ -3,16 +3,22 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { lastValueFrom } from 'rxjs';
 import { ApiRequestService } from 'src/app/services/api-request.service';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  providers: [
+    { provide: CarouselConfig, useValue: { interval: 1500, noPause: true, showIndicators: true } }
+  ]
 })
 export class HomeComponent implements OnInit {
   /* Pruebas de peticiones al backend */
   //formulario: FormGroup;
 
+  ASSETS = environment.ASSET_URL
   isLoading: boolean = true;
 
   constructor(
