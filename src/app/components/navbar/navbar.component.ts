@@ -59,8 +59,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     });
     
     this.isAuthenticated = this.auth.isAuthenticated();
+    if(this.isAuthenticated){
 
-    try {
+      try {
         this.userLogged = await lastValueFrom(
           this.apiRequestService.getAllWithAuth<any[]>('perfil')
         );
@@ -73,6 +74,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       } catch (e) {
       } finally {
       }
+
+    }
+    
 
   }
   async Logout():Promise<void>{
