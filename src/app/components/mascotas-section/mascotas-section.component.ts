@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { lastValueFrom } from 'rxjs';
 import { ApiRequestService } from 'src/app/services/api-request.service';
@@ -15,7 +16,7 @@ export class MascotasSectionComponent implements OnInit {
   mascotasRecientes: any[] = [];
   constructor(
     private apiRequestService: ApiRequestService,
-    private message: ToastrService
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -26,6 +27,12 @@ export class MascotasSectionComponent implements OnInit {
     } catch (e) {
       console.error(e);
     } finally {
+    }
+  }
+
+  async goToUserDetail(id: number | undefined): Promise<void> {
+    if (id) {
+      this.router.navigateByUrl('/home/usuario/' + id);
     }
   }
 }

@@ -1,0 +1,37 @@
+<div id="UserPage" class="container-fluid pagina-general">
+    <div class="row">
+        <div class="col">
+            <img *ngIf="this.usuario.imagen && this.usuario.imagen != ''" [src]="this.usuario.imagen"
+                class="propietario mx-auto">
+            <span *ngIf="!(this.usuario.imagen && this.usuario.imagen != '')"
+                class="propietario propietario-span mx-auto">
+                <i class="bi bi-person-circle propietario-default"></i>
+            </span>
+            <h3>{{ (this.usuario && this.usuario.nombre !== '') ? this.usuario.nombre :'Usuario'}}</h3>
+        </div>
+    </div>
+
+    <section id="user-mascotas-section">
+        <div *ngIf="this.usuario.mascotas && this.usuario.mascotas.length>0" class="row">
+            <div class="col">
+                <div *ngFor="let mascota of this.usuario.mascotas" class="card mascota-card">
+                    <img [src]="(mascota?.imagenes && mascota?.imagenes.length>0 && mascota?.imagenes[0]!=='') ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3>{{mascota?.nombre ? mascota?.nombre : ''}}</h3>
+
+                        <div class="info-mascota">
+                            <p> <strong>Edad:</strong>{{mascota?.edad ? mascota?.edad : '--'}} </p>
+                            <p> <strong>Descripción:</strong>{{mascota?.descripcion ? mascota?.descripcion : '--'}} </p>
+                            <p> <strong>Sexo:</strong>{{mascota?.sexo ? mascota?.sexo : '--'}} </p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

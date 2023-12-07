@@ -51,10 +51,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.router.events.subscribe((val) => {
       if (this.router.url === '/home') {
         this.isHome = true;
-        console.log('ES HOME ONINIT: ', this.router.url);
       } else {
         this.isHome = false;
-        console.log('NO ES HOME ONINIT: ', this.router.url);
       }
     });
     
@@ -65,8 +63,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         this.userLogged = await lastValueFrom(
           this.apiRequestService.getAllWithAuth<any[]>('perfil')
         );
-
-        console.log('User logged: ', this.userLogged);
 
         //this.userLogged.imagen = '';
   

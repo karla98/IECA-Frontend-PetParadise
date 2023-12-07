@@ -9,10 +9,12 @@
                 <span *ngIf="mascota?.propietario">
                     <img *ngIf="mascota?.propietario.imagen && mascota?.propietario.imagen != ''"
                         [src]="mascota?.propietario.imagen" class="propietario" data-bs-toggle="tooltip" 
-                        data-bs-placement="bottom" [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'">
+                        data-bs-placement="bottom" [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'"
+                        (click)="this.goToUserDetail(mascota?.propietario._id)">
                     <span *ngIf="!(mascota?.propietario.imagen && mascota?.propietario.imagen)"
                         class="propietario propietario-span" data-bs-toggle="tooltip" 
-                        data-bs-placement="bottom" [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'">
+                        data-bs-placement="bottom" [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'"
+                        (click)="this.goToUserDetail(mascota?.propietario._id)">
                         <i class="bi bi-person-circle propietario-default"></i>
                     </span>
                 </span>

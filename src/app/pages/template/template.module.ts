@@ -10,6 +10,7 @@ import { EventosComponent } from './eventos/eventos.component';
 import { TemplateComponent } from './template/template.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     EventosComponent,
     TemplateComponent,
     PerfilComponent,
+    UsuarioComponent,
   ],
   imports: [
     CommonModule,

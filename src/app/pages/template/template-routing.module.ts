@@ -5,6 +5,7 @@ import { MascotasComponent } from './mascotas/mascotas.component';
 import { TipsComponent } from './tips/tips.component';
 import { TemplateComponent } from './template/template.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,8 @@ const routes: Routes = [
       { path: 'mascotas', component: MascotasComponent, data: { title: 'Mascotas' } },
        { path: 'tips', component: TipsComponent, data: { title: 'Tips' } },
        { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil' } },
+
+       { path: 'usuario/:id', component: UsuarioComponent, data: { title: 'Usuario' } },
      
        { path: '**', redirectTo: '' },      
 
