@@ -4,4 +4,51 @@
             <h3>MASCOTAS</h3>
         </div>
     </div>
+
+    <app-loading *ngIf="this.isLoading"></app-loading>
+
+    <ng-container *ngIf="!this.isLoading">
+        <section id="mascotas-section">
+            <div *ngFor="let mascota of this.mascotasList.items" class="card mascota-card">
+                <img [src]="(mascota?.imagenes && mascota?.imagenes.length>0) ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3>{{mascota?.nombre ? mascota?.nombre : ''}}</h3>
+
+                    <div class="info-mascota">
+                        <span *ngIf="mascota?.propietario">
+                            <img *ngIf="mascota?.propietario.imagen && mascota?.propietario.imagen != ''"
+                                [src]="mascota?.propietario.imagen" class="propietario" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom"
+                                [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'"
+                                (click)="this.goToUserDetail(mascota?.propietario._id)">
+                            <span *ngIf="!(mascota?.propietario.imagen && mascota?.propietario.imagen)"
+                                class="propietario propietario-span" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'"
+                                (click)="this.goToUserDetail(mascota?.propietario._id)">
+                                <i class="bi bi-person-circle propietario-default"></i>
+                            </span>
+                        </span>
+
+                        <span *ngIf="mascota?.sexo && (mascota?.sexo === 'Macho' || mascota?.sexo === 'Hembra') "
+                            class="gender">
+                            <i *ngIf="mascota?.sexo === 'Macho'" class="bi bi-gender-male macho"></i>
+                            <i *ngIf="mascota?.sexo === 'Hembra'" class="bi bi-gender-female hembra"></i>
+                        </span>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <pagination class="pagination-list" 
+        [totalItems]="this.mascotasList.totalItems" 
+        (pageChanged)="this.goToPage($event)"
+        [(ngModel)]="this.currentPage" 
+        [itemsPerPage]="limitPaginado"
+        ></pagination>
+
+
+    </ng-container>
+
 </div>

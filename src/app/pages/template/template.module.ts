@@ -12,6 +12,9 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { UsuarioComponent } from './usuario/usuario.component';
 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -27,6 +30,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
     TemplateRoutingModule,
     ComponentsModule,
     CarouselModule.forRoot(),
+    PaginationModule.forRoot(),
+    FormsModule,
   ]
 })
 export class TemplateModule { }
