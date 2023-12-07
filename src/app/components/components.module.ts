@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MascotasSectionComponent } from './mascotas-section/mascotas-section.component';
 import { UploaderComponent } from './uploader/uploader.component';
+import { UpProfileLoaderComponent } from './up-profile-loader/up-profile-loader.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { UploaderComponent } from './uploader/uploader.component';
     NavbarComponent,
     FooterComponent,
     MascotasSectionComponent,
-    UploaderComponent
+    UploaderComponent,
+    UpProfileLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,7 @@ import { UploaderComponent } from './uploader/uploader.component';
     FooterComponent,
     MascotasSectionComponent,
     UploaderComponent,
-    
+    UpProfileLoaderComponent
   ]
 })
 export class ComponentsModule { }
