@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
+      /*
       const response = await lastValueFrom(
         this.apiRequestService.getAll<any[]>('mascotas')
       );
@@ -53,7 +54,7 @@ export class HomeComponent implements OnInit {
         )
       );
       console.log('Mascotas By ID: ', responseOne);
-
+*/
       /* ---------- Prueba Post -------------- */
       /*
       const mascota = {

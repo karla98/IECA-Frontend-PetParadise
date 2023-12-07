@@ -1,5 +1,58 @@
+@import '../../../assets/partial/vars';
+
 #mascotas-section {
-    height: 500px;
+    padding: 30px;
+    height: auto;
     width: 100vw;
-    border: 2px solid red;
+    padding: 50px 50px;
+    overflow: hidden;
+    display: flex; 
+    justify-content: center;
+    flex-wrap: wrap;
 }
+
+.mascota-card{
+    width: 16rem; 
+    margin: 10px;
+}
+
+.propietario {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+  
+    background-color: $gray;
+
+    cursor: pointer;
+  }
+  
+  .propietario-span {
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  .propietario-default {
+    font-size: 25px;
+  }
+
+  .info-mascota{
+    display:inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    .gender{
+        font-size: 16px;
+        font-weight: bold;
+        .macho{
+            color: $blue;
+        }
+    
+        .hembra{
+            color: $red;
+        }
+    }
+  }
