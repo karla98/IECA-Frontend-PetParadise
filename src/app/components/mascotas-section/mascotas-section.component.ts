@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 })
 export class MascotasSectionComponent implements OnInit {
   assets_path = environment.ASSET_URL;
+  isLoading: boolean = true;
+
 
   mascotasRecientes: any[] = [];
   constructor(
@@ -21,12 +23,14 @@ export class MascotasSectionComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
+      this.isLoading = true;
       this.mascotasRecientes = await lastValueFrom(
         this.apiRequestService.getAll<any[]>('home')
       );
     } catch (e) {
       console.error(e);
     } finally {
+      this.isLoading = false;
     }
   }
 

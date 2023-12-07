@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 export class UsuarioComponent implements OnInit {
   assets_path = environment.ASSET_URL;
 
+  isLoading: boolean = true;
+
   usuario: any = {};
   userId:string = '';
   constructor(private apiRequestService: ApiRequestService, private route: ActivatedRoute) {}
@@ -23,6 +25,7 @@ export class UsuarioComponent implements OnInit {
     });
 
     try {
+      this.isLoading = true;
       this.usuario = await lastValueFrom(
         this.apiRequestService.getOne<any>(
           'usuarios',
@@ -33,6 +36,7 @@ export class UsuarioComponent implements OnInit {
     } catch (e) {
       console.error(e);
     } finally {
+      this.isLoading = false;
     }
   }
 }
