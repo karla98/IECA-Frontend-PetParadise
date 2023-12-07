@@ -1,0 +1,35 @@
+@import '../../../assets/partial/vars';
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 5px solid $gray;
+  border-top: 5px solid $orange;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  /* Aquí definimos la animación */
+}
+
+.loading-text {
+  margin-top: 10px;
+  color: $dark-gray;
+  font-size: 16px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

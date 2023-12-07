@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MascotasSectionComponent } from './mascotas-section/mascotas-section.component';
 import { UploaderComponent } from './uploader/uploader.component';
 import { UpProfileLoaderComponent } from './up-profile-loader/up-profile-loader.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UpProfileLoaderComponent } from './up-profile-loader/up-profile-loader.
     FooterComponent,
     MascotasSectionComponent,
     UploaderComponent,
-    UpProfileLoaderComponent
+    UpProfileLoaderComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { UpProfileLoaderComponent } from './up-profile-loader/up-profile-loader.
     FooterComponent,
     MascotasSectionComponent,
     UploaderComponent,
-    UpProfileLoaderComponent
+    UpProfileLoaderComponent,
+    LoadingComponent,
   ]
 })
 export class ComponentsModule { }

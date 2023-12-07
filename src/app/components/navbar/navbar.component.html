@@ -15,27 +15,34 @@
   
         <div class="collapse navbar-collapse text-center" id="navigation">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            <li class="nav-item nav-item-flex">
               <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item nav-item-flex">
               <a class="nav-link" routerLink="/home/mascotas" routerLinkActive="active">Mascotas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item nav-item-flex">
               <a class="nav-link" routerLink="/home/tips" routerLinkActive="active">Tips</a>
             </li>
-            <li *ngIf="this.isAuthenticated" class="nav-item nav-item-perfil">
-              <img *ngIf="this.userLogged?.imagen && this.userLogged?.imagen != ''" [src]="this.userLogged?.imagen" class="user-avatar">
-              <span *ngIf="!(this.userLogged?.imagen && this.userLogged?.imagen != '')" class="user-avatar user-avatar-span">
-                <i  class="bi bi-person-circle user-avatar-default"></i>
-              </span>
+            <li *ngIf="this.isAuthenticated" class="nav-item nav-item-flex nav-item-perfil" style="display: flex !important; flex-direction: column !important;">
               
-              <a class="nav-link" routerLink="/home/perfil" routerLinkActive="active">Perfil</a>
+              <div style="display: flex !important; flex-direction: row !important;">
+                <a class="nav-link" style="" routerLink="/home/perfil" routerLinkActive="active">
+                  <img *ngIf="this.userLogged?.imagen && this.userLogged?.imagen != ''" [src]="this.userLogged?.imagen" class="user-avatar">
+                  <span *ngIf="!(this.userLogged?.imagen && this.userLogged?.imagen != '')" class="user-avatar user-avatar-span">
+                    <i  class="bi bi-person-circle user-avatar-default"></i>
+                  </span>
+                  
+                  Perfil
+                </a>
+              </div>
+
+              
             </li>
-            <li *ngIf="!this.isAuthenticated" class="nav-item">
+            <li *ngIf="!this.isAuthenticated" class="nav-item nav-item-flex">
               <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Login</a>
             </li>
-            <li *ngIf="this.isAuthenticated" class="nav-item">
+            <li *ngIf="this.isAuthenticated" class="nav-item nav-item-flex">
               <a class="nav-link" (click)="Logout()" routerLinkActive="active">Logout</a>
             </li>
           </ul>
