@@ -14,12 +14,6 @@ import { Router } from '@angular/router';
 })
 export class PerfilComponent implements OnInit {
 
-  hero = {
-    name: 'Iron Man',
-    age: 30,
-    powers: ['Super strength', 'Flight']
-  };
-
   constructor(
     private router: Router,
     private apiRequestService: ApiRequestService,
