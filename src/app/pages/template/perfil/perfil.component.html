@@ -17,16 +17,11 @@
             </div>
             <div class="perfil-usuario-footer">
                 <div class="lista-datos">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Lorem ipsum dolor</li>
-                   </div>
-                <div class="lista-datos">
-                    <li>Lorem ipsum dolor</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Lorem ipsum dolor</li>
+                    <form action="">
+                        <textarea name="nota" id="nota" cols="80" placeholder="Describe el momento"></textarea>
+                        <app-uploader [isImgPerfil]="false" (filesSelected)="onFileSelected($event)"></app-uploader>
+                        <button type="submit">Publicar</button>
+                    </form>
                 </div>
             </div>
         </div>
