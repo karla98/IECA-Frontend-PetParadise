@@ -23,6 +23,12 @@
   margin-left: 7px;
 }
 
+.nav-item-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .user-avatar {
   width: 40px;
   height: 40px;
@@ -33,6 +39,8 @@
   -o-border-radius: 50%;
 
   background-color: $gray;
+
+  margin-right: 0.5rem;
 }
 
 .user-avatar-span {
