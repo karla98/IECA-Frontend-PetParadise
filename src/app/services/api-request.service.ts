@@ -29,7 +29,7 @@ export class ApiRequestService {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
-    console.log('token: ', headers);
+    //console.log('token: ', headers);
     
     return headers;
   }

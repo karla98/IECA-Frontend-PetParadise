@@ -65,12 +65,22 @@
     align-items: center;
 }
 
-//*TODO - Checar colores componente paginador
-.active>.page-link{
-    background-color: $green !important;
-    border-color: $green !important;
+.details-mascota {
+    padding-top: 1rem;
+    width: 100%;
+    text-align: justify;
+
+    strong {
+        margin-right: 8px;
+    }
 }
 
-.page-link {
-    color: $green !important;
+::ng-deep .page-link {
+    color: $dark-green !important;
+}
+
+::ng-deep .active>.page-link {
+    background-color: $dark-green !important;
+    border-color: $dark-green !important;
+    color: white !important;
 }

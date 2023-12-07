@@ -89,7 +89,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (this.isWidthResponsive && this.navButtonResponsivo?.nativeElement) {
       const buttonElement = this.navButtonResponsivo.nativeElement;
-      console.log('Entra a IF ngAfterViewInit');
 
       // Observa cambios en aria-expanded utilizando MutationObserver
       const observer = new MutationObserver((mutationsList, observer) => {
@@ -124,7 +123,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     } else if ($event && window.pageYOffset > 100 && this.isHome) {
       this.scrollPageMax = true;
     } else if (!this.isHome) {
-      console.log('ENTRA AL IF QUE QUIERO');
       this.scrollPage = true;
       this.scrollPageMax = true;
     } else {
