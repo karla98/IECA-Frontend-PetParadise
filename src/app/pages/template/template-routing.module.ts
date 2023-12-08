@@ -15,7 +15,9 @@ const routes: Routes = [
 
       { path: 'mascotas', component: MascotasComponent, data: { title: 'Mascotas' } },
        { path: 'tips', component: TipsComponent, data: { title: 'Tips' } },
-       { path: 'perfil', component: PerfilComponent, data: { title: 'Perfil' } },
+       //{ path: 'perfil', component: PerfilComponent, data: { title: 'Perfil' } },
+       { path: 'perfil', loadChildren: () => import('./perfil-usuario/perfil-usuario.module').then( (m) => m.PerfilUsuarioModule),  
+    data: {title: 'Perfil'} },
 
        { path: 'usuario/:id', component: UsuarioComponent, data: { title: 'Usuario' } },
 

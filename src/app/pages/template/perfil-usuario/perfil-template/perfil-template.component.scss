@@ -1,0 +1,45 @@
+@import '../../../../../assets/partial/vars';
+
+.perfil-contenedor{
+    height: auto;
+    padding-top: 160px;
+    padding-bottom: 30px;
+
+    .nav-item{
+        background-color: white !important;
+    }
+
+    .nav-tabs{
+        background-color: white !important;
+    }
+
+    .card {
+        background-color: white !important;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
+
+.card-header {
+    padding: 0 !important;
+    border-bottom: 0 !important;
+
+}
+
+.card-body {
+    background-color: transparent !important;
+    padding-top: 40px !important;
+    padding-bottom: 30px !important;
+}
+
+.nav-link {
+    color: $dark-gray !important;
+    background-color: transparent;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: transparent !important;
+    color: $dark-green !important;
+}

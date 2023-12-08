@@ -1,0 +1,25 @@
+<div class="container-fluid perfil-contenedor">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/home/perfil/mi-cuenta" routerLinkActive="active">Mi cuenta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/home/perfil/add-mascota" routerLinkActive="active">Agregar mascota</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/home/perfil/mis-mascota" routerLinkActive="active">Mis mascotas</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card-body">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

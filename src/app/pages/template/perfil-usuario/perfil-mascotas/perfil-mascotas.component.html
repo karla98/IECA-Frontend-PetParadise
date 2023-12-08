@@ -1,0 +1,83 @@
+<form class="mascotas-form" [formGroup]="formGroup">
+
+    <div class="mb-3 imagenes-list">
+        <app-uploader [isImgPerfil]="false" (filesSelected)="onFileSelected($event)"></app-uploader>
+    </div>
+
+    <div class="mb-3 form-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" formControlName="nombre" placeholder="Escribe cómo se llama tu mascota" type="text" class="form-control"
+            autocomplete="off">
+        <div *ngIf="formGroup.get('nombre')?.hasError('required') && formGroup.get('nombre')?.touched"
+            class="error-message">
+            Campo requerido
+        </div>
+    </div>
+
+    <!-- Especie -->
+    <div class="mb-3 form-group">
+        <label for="especie">Especie</label>
+        <select id="especie" formControlName="especie" class="form-control">
+            <option value="" disabled selected>Selecciona una especie</option>
+            <option *ngFor="let especie of especies" [value]="especie._id">{{ especie.nombre }}</option>
+        </select>
+        <div *ngIf="formGroup.get('especie')?.hasError('required') && formGroup.get('especie')?.touched"
+            class="error-message">
+            Campo requerido
+        </div>
+    </div>
+
+    <!-- Raza -->
+    <div class="mb-3 form-group">
+        <label for="raza">Raza</label>
+        <select id="raza" formControlName="raza" class="form-control">
+            <option value="" disabled selected>Selecciona una raza</option>
+            <option *ngFor="let raza of razas" [value]="raza._id">{{ raza.nombre }}</option>
+        </select>
+        <div *ngIf="formGroup.get('raza')?.hasError('required') && formGroup.get('raza')?.touched"
+            class="error-message">
+            Campo requerido
+        </div>
+    </div>
+
+    <!-- Edad -->
+    <div class="mb-3 form-group">
+        <label for="edad">Edad</label>
+        <select id="edad" formControlName="edad" class="form-control">
+            <option *ngFor="let i of this.edad" [value]="i">{{ i }}</option>
+        </select>
+        <div *ngIf="formGroup.get('edad')?.hasError('required') && formGroup.get('edad')?.touched"
+            class="error-message">
+            Campo requerido
+        </div>
+    </div>
+
+
+    <!-- Sexo -->
+    <div class="mb-3 form-group">
+        <label for="sexo">Sexo</label>
+        <select id="sexo" formControlName="sexo" class="form-control">
+            <option value="" disabled selected>Selecciona su sexo</option>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+            <option value="No especificado">No especificado</option>
+        </select>
+        <div *ngIf="formGroup.get('sexo')?.hasError('required') && formGroup.get('sexo')?.touched"
+            class="error-message">
+            Campo requerido
+        </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-3 form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Describe cómo es su carácter, su físico..." class="form-control"
+            rows="4"></textarea>
+        <div *ngIf="formGroup.get('descripcion')?.hasError('required') && formGroup.get('descripcion')?.touched"
+            class="error-message">
+            Campo requerido
+        </div>
+    </div>
+
+    <button (click)="onSubmit()" class="btn auth-btn-custom">Submit</button>
+</form>

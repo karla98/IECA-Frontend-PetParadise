@@ -1,0 +1,71 @@
+@import '../../../../../assets/partial/vars';
+
+.mascotas-form{
+    padding: 20px;
+}
+
+
+.form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: $dark-green;
+}
+
+
+.form-control {
+    background-color: transparent !important;
+    border-bottom: 3px solid $dark-green;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+}
+
+.form-control:hover {
+    background-color: transparent !important;
+    border-bottom: 3px solid $orange;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+}
+.form-control:focus {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 3px solid $orange;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+}
+
+.error-message {
+    color: $red;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+.imagenes-list{
+    display: flex;
+    justify-content: center;
+}
+
+  

@@ -10,7 +10,8 @@ export class UploaderComponent implements OnInit {
 
   @Input() isImgPerfil: boolean = false;
 
-  previews: any[] = [];
+  @Input() previews: any[] = [];
+  
   loadingPreviews = false;
   fileList: File[] = [];
   numMaxFiles: boolean = false;
@@ -82,5 +83,10 @@ export class UploaderComponent implements OnInit {
       this.fileList = [];
       this.previews = [];
     }
+  }
+
+  reset(): void {
+      this.fileList = [];
+      this.previews = [];
   }
 }

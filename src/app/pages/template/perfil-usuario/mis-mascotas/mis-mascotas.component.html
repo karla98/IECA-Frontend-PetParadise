@@ -1,0 +1,33 @@
+<div class="mis-mascotas">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">Img</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Sexo</th>
+              <th scope="col">Edad</th>
+              <th scope="col">Especie</th>
+              <th scope="col">Raza</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mascota of this.misMascotas">
+              <td>
+                <img *ngIf="mascota.imagenes && mascota.imagenes.length > 0 && mascota.imagenes !==''" 
+                [src]="mascota.imagenes[0]" alt="" width="50px">
+                <img *ngIf="!(mascota.imagenes && mascota.imagenes.length > 0 && mascota.imagenes !=='')" 
+                [src]="this.ASSETS + '/no-image.svg'" alt="" width="50px">
+
+              </td>
+              <td>{{mascota.nombre ? mascota.nombre : '--'}}</td>
+              <td>{{mascota.sexo ? mascota.sexo : '--'}}</td>
+              <td>{{mascota.edad ? mascota.edad : '--'}}</td>
+              <td>{{(mascota.especie && mascota.especie.nombre) ? mascota.especie.nombre : '--'}}</td>
+              <td>{{(mascota.raza && mascota.raza.nombre) ? mascota.raza.nombre : '--'}}</td>
+
+            </tr>
+          </tbody>
+    </table>
+
+</div>
