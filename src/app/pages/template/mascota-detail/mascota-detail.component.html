@@ -1,7 +1,7 @@
 <app-loading *ngIf="this.isLoading"></app-loading>
 
 
-<ng-container *ngIf="!this.isLoading">
+<ng-container *ngIf="!this.isLoading" style="margin-top: 160px;">
     <carousel *ngIf="this.mascota.imagenes.length >1" style="width: 100%;">
         <slide *ngFor="let img of this.mascota.imagenes" class="mascota-img">
             <img [src]="img" alt="first slide">
@@ -10,9 +10,9 @@
     <div id="MascotaDetailPage" class="container-fluid">
         <section id="info-mascotas-detail">
 
-            <div class="mascota-img">
-                <img *ngIf="this.mascota.imagenes.length ===1 && this.mascota.imagenes[0] !== ''"
-                    [src]="this.mascota.imagenes[0]" class="propietario mx-auto" style="display: flex;">
+            <div *ngIf="this.mascota.imagenes.length ===1 && this.mascota.imagenes[0] !== ''" class="mascota-img2">
+                <img 
+                    [src]="this.mascota.imagenes[0]" class="mx-auto" style="display: flex;">
             </div>
 
             <div class="details">

@@ -3,7 +3,7 @@
 <ng-container *ngIf="!this.isLoading">
     <section id="mascotas-section">
         <div *ngFor="let mascota of this.mascotasRecientes" class="card mascota-card">
-            <img [src]="(mascota?.imagenes && mascota?.imagenes.length>0) ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
+            <img (click)="this.goToMascotaDetail(mascota?._id)" [src]="(mascota?.imagenes && mascota?.imagenes.length>0) ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
                 class="card-img-top" alt="...">
             <div class="card-body">
                 <h3>{{mascota?.nombre ? mascota?.nombre : ''}}</h3>
@@ -23,7 +23,7 @@
                     </span>
     
                     <span *ngIf="mascota?.sexo && (mascota?.sexo === 'Macho' || mascota?.sexo === 'Hembra') "
-                        class="gender">
+                        class="gender" (click)="this.goToMascotaDetail(mascota?._id)">
                         <i *ngIf="mascota?.sexo === 'Macho'" class="bi bi-gender-male macho"></i>
                         <i *ngIf="mascota?.sexo === 'Hembra'" class="bi bi-gender-female hembra"></i>
                     </span>

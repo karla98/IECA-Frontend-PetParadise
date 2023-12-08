@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { ApiRequestService } from 'src/app/services/api-request.service';
 import { environment } from 'src/environments/environment';
@@ -16,7 +16,7 @@ export class UsuarioComponent implements OnInit {
 
   usuario: any = {};
   userId:string = '';
-  constructor(private apiRequestService: ApiRequestService, private route: ActivatedRoute) {}
+  constructor(private apiRequestService: ApiRequestService, private route: ActivatedRoute, private router: Router) {}
 
   async ngOnInit(): Promise<void> {
     await this.route.params.subscribe(params => {
@@ -37,6 +37,12 @@ export class UsuarioComponent implements OnInit {
       console.error(e);
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async goToMascotaDetail(id: number | undefined): Promise<void> {
+    if (id) {
+      this.router.navigateByUrl('/home/mascota/' + id);
     }
   }
 }

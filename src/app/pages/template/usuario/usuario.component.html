@@ -15,10 +15,10 @@
             </div>
         </div>
 
-        <section id="user-mascotas-section">
+        <section id="user-mascotas-section container">
             <div *ngIf="this.usuario.mascotas && this.usuario.mascotas.length>0" class="row">
-                <div class="col">
-                    <div *ngFor="let mascota of this.usuario.mascotas" class="card mascota-card">
+                <div class="col" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    <div (click)="this.goToMascotaDetail(mascota?._id)" *ngFor="let mascota of this.usuario.mascotas" class="card mascota-card">
                         <img [src]="(mascota?.imagenes && mascota?.imagenes.length>0 && mascota?.imagenes[0]!=='') ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
                             class="card-img-top" alt="...">
                         <div class="card-body">
@@ -26,7 +26,7 @@
 
                             <div class="info-mascota">
                                 <p> <strong>Edad:</strong>{{mascota?.edad ? mascota?.edad : '--'}} </p>
-                                <p> <strong>Descripción:</strong>{{mascota?.descripcion ? mascota?.descripcion : '--'}}
+                                <p class="description"> <strong>Descripción:</strong>{{mascota?.descripcion ? mascota?.descripcion : '--'}}
                                 </p>
                                 <p> <strong>Sexo:</strong>{{mascota?.sexo ? mascota?.sexo : '--'}} </p>
 
