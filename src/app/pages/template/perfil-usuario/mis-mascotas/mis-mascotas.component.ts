@@ -11,33 +11,35 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-mis-mascotas',
   templateUrl: './mis-mascotas.component.html',
-  styleUrls: ['./mis-mascotas.component.scss']
+  styleUrls: ['./mis-mascotas.component.scss'],
 })
-export class MisMascotasComponent implements OnInit{ 
-  ASSETS = environment.ASSET_URL
+export class MisMascotasComponent implements OnInit {
+  ASSETS = environment.ASSET_URL;
 
   formGroup!: FormGroup;
 
   isLoading: boolean = true;
 
-  especies: any[] =[];
-  razas: any[] =[];
+  especies: any[] = [];
+  razas: any[] = [];
 
-  misMascotas: any[] =[];
+  misMascotas: any[] = [];
 
   edad: number[] = [];
 
-  formData: any;
-
   imagenes: File[] = [];
+  formData = new FormData();
+
 
   @ViewChild(UploaderComponent) uploaderComponent!: UploaderComponent;
 
-
-  constructor(private fb: FormBuilder, 
-    private authService: AuthService, 
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
     private apiRequestService: ApiRequestService,
-    private router: Router, private message: ToastrService ) {
+    private router: Router,
+    private message: ToastrService
+  ) {
     this.formGroup = this.fb.group({
       nombre: ['', [Validators.required]],
       especie: ['', [Validators.required]],
@@ -49,11 +51,10 @@ export class MisMascotasComponent implements OnInit{
   }
 
   async ngOnInit(): Promise<void> {
-
-    for(let i=0; i<=20; i++){
+    for (let i = 0; i <= 20; i++) {
       this.edad.push(i);
     }
-    
+
     try {
       this.isLoading = true;
 
@@ -80,15 +81,13 @@ export class MisMascotasComponent implements OnInit{
   }
 
   async onFileSelected(files: File[]): Promise<void> {
-    this.formData = new FormData();
     this.imagenes = files;
     for (const file of this.imagenes) {
       this.formData.append('imagenes', file, file.name);
     }
   }
 
-
-  async onSubmit():Promise<void>{
+  async onSubmit(): Promise<void> {
     if (this.formGroup.valid) {
       this.formGroup.markAllAsTouched();
       console.log('formulario válido: ', this.formGroup.valid);
@@ -101,7 +100,6 @@ export class MisMascotasComponent implements OnInit{
       this.formData.append('especie', this.formGroup.value.especie);
 
       try {
-        
         await lastValueFrom(
           this.apiRequestService.createWithFile<any>('mascotas', this.formData)
         );
@@ -114,12 +112,32 @@ export class MisMascotasComponent implements OnInit{
       } catch (error) {
         console.error('Error:', error);
       }
-    }else{
-      this.message.error('Formulario inválido')
-
+    } else {
+      this.message.error('Formulario inválido');
     }
-
   }
 
+  async deleteMascota(id: string): Promise<void> {
+    try {
+      this.isLoading = true;
 
+      const eliminado = await lastValueFrom(
+        this.apiRequestService.delete<any>(
+          'mascotas',
+          id
+        )
+      );
+
+      if(eliminado){
+        this.misMascotas = this.misMascotas.filter(objeto => objeto._id !== id);
+        this.message.success('Elemento eliminado exitosamente');
+
+      }
+
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.isLoading = false;
+    }
+  }
 }

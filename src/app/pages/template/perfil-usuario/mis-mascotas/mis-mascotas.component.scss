@@ -1,0 +1,13 @@
+@import '../../../../../assets/partial/vars';
+
+th{
+    text-align: center;
+}
+
+.accion{
+    text-align: center;
+    font-size: 20px;
+    color: $dark-green;
+
+    cursor: pointer;
+}
