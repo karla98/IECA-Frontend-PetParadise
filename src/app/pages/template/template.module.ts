@@ -14,6 +14,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
+import { MascotaDetailComponent } from './mascota-detail/mascota-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     TemplateComponent,
     PerfilComponent,
     UsuarioComponent,
+    MascotaDetailComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,30 @@
+<app-loading *ngIf="this.isLoading"></app-loading>
+
+
+<ng-container *ngIf="!this.isLoading">
+    <carousel *ngIf="this.mascota.imagenes.length >1" style="width: 100%;">
+        <slide *ngFor="let img of this.mascota.imagenes" class="mascota-img">
+            <img [src]="img" alt="first slide">
+        </slide>
+    </carousel>
+    <div id="MascotaDetailPage" class="container-fluid">
+        <section id="info-mascotas-detail">
+
+            <div class="mascota-img">
+                <img *ngIf="this.mascota.imagenes.length ===1 && this.mascota.imagenes[0] !== ''"
+                    [src]="this.mascota.imagenes[0]" class="propietario mx-auto" style="display: flex;">
+            </div>
+
+            <div class="details">
+                <h2>{{ (this.mascota && this.mascota.nombre !== '') ? this.mascota.nombre :'Detalle de Mascota'}}</h2>
+                <p>{{this.mascota.descripcion ? this.mascota.descripcion : 'No hay descripción'}}</p>
+                <span><strong>Sexo: </strong> {{this.mascota.sexo ? this.mascota.sexo : '--'}}</span>
+                <span><strong>Edad: </strong> {{this.mascota.edad ? this.mascota.edad : '--'}}</span>
+
+            </div>
+
+
+        </section>
+
+    </div>
+</ng-container>

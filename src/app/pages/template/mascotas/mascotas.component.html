@@ -10,36 +10,34 @@
     <ng-container *ngIf="!this.isLoading">
         <section id="mascotas-section">
             <div *ngFor="let mascota of this.mascotasList.items" class="card mascota-card">
-                <img [src]="(mascota?.imagenes && mascota?.imagenes.length>0 && mascota?.imagenes[0] !== '') ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
+                <img (click)="this.goToMascotaDetail(mascota?._id)" [src]="(mascota?.imagenes && mascota?.imagenes.length>0 && mascota?.imagenes[0] !== '') ? mascota?.imagenes[0]: this.assets_path + '/no-image.svg'"
                     class="card-img-top" alt="...">
                 <div class="card-body">
                     <h3>{{mascota?.nombre ? mascota?.nombre : ''}}</h3>
 
                     <div class="info-mascota">
-                        <span *ngIf="mascota?.propietario">
+                        <span *ngIf="mascota?.propietario" (click)="this.goToUserDetail(mascota?.propietario._id)">
                             <img *ngIf="mascota?.propietario.imagen && mascota?.propietario.imagen != ''"
                                 [src]="mascota?.propietario.imagen" class="propietario" data-bs-toggle="tooltip"
                                 data-bs-placement="bottom"
-                                [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'"
-                                (click)="this.goToUserDetail(mascota?.propietario._id)">
+                                [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'">
                             <span *ngIf="!(mascota?.propietario.imagen && mascota?.propietario.imagen && mascota?.propietario.imagen != '')"
                                 class="propietario propietario-span" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'"
-                                (click)="this.goToUserDetail(mascota?.propietario._id)">
+                                [title]="mascota?.propietario.nombre ? mascota?.propietario.nombre : 'Propietario'">
                                 <i class="bi bi-person-circle propietario-default"></i>
                             </span>
                         </span>
 
                         <span *ngIf="mascota?.sexo && (mascota?.sexo === 'Macho' || mascota?.sexo === 'Hembra') "
-                            class="gender">
+                            class="gender" (click)="this.goToMascotaDetail(mascota?._id)">
                             <i *ngIf="mascota?.sexo === 'Macho'" class="bi bi-gender-male macho"></i>
                             <i *ngIf="mascota?.sexo === 'Hembra'" class="bi bi-gender-female hembra"></i>
                         </span>
                     </div>
 
-                    <div class="details-mascota">
+                    <div class="details-mascota" (click)="this.goToMascotaDetail(mascota?._id)">
                         <p> <strong>Edad:</strong>{{mascota?.edad ? mascota?.edad : '--'}} </p>
-                        <p> <strong>Descripción:</strong>{{mascota?.descripcion ? mascota?.descripcion : '--'}}
+                        <p class="description"> <strong>Descripción:</strong>{{mascota?.descripcion ? mascota?.descripcion : '--'}}
                         </p>
                     </div>
 

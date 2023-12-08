@@ -14,6 +14,7 @@
 .mascota-card {
     width: 16rem;
     margin: 10px;
+    cursor: pointer;
 }
 
 .propietario {
@@ -72,6 +73,13 @@
 
     strong {
         margin-right: 8px;
+    }
+
+    .description {
+        max-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 

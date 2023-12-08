@@ -65,4 +65,10 @@ export class MascotasComponent implements OnInit {
     }
   }
 
+  async goToMascotaDetail(id: number | undefined): Promise<void> {
+    if (id) {
+      this.router.navigateByUrl('/home/mascota/' + id);
+    }
+  }
+
 }
