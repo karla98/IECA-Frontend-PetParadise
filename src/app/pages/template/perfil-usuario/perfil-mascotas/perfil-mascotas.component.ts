@@ -22,7 +22,7 @@ export class PerfilMascotasComponent implements OnInit{
 
   edad: number[] = [];
 
-  formData: any;
+  formData = new FormData();;
 
   imagenes: File[] = [];
 
@@ -69,10 +69,11 @@ export class PerfilMascotasComponent implements OnInit{
   }
 
   async onFileSelected(files: File[]): Promise<void> {
-    this.formData = new FormData();
     this.imagenes = files;
-    for (const file of this.imagenes) {
-      this.formData.append('imagenes', file, file.name);
+    if(this.imagenes.length>0){
+      for (const file of this.imagenes) {
+        this.formData.append('imagenes', file, file.name);
+      }
     }
   }
 

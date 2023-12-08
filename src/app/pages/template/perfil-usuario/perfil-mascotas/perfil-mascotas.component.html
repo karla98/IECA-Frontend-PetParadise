@@ -1,8 +1,7 @@
+<div class="mb-3 imagenes-list">
+    <app-uploader [isImgPerfil]="false" (filesSelected)="onFileSelected($event)"></app-uploader>
+</div>
 <form class="mascotas-form" [formGroup]="formGroup">
-
-    <div class="mb-3 imagenes-list">
-        <app-uploader [isImgPerfil]="false" (filesSelected)="onFileSelected($event)"></app-uploader>
-    </div>
 
     <div class="mb-3 form-group">
         <label for="nombre">Nombre</label>
