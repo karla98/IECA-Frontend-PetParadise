@@ -1,37 +1,133 @@
 <div class="mis-mascotas">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-              <th scope="col">Img</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Sexo</th>
-              <th scope="col">Edad</th>
-              <th scope="col">Especie</th>
-              <th scope="col">Raza</th>
-              <th scope="col">Editar</th>
-              <th scope="col">Eliminar</th>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Img</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Sexo</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Especie</th>
+        <th scope="col">Raza</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
 
 
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let mascota of this.misMascotas">
-              <td>
-                <img *ngIf="mascota.imagenes && mascota.imagenes.length > 0 && mascota.imagenes !==''" 
-                [src]="mascota.imagenes[0]" alt="" width="50px">
-                <img *ngIf="!(mascota.imagenes && mascota.imagenes.length > 0 && mascota.imagenes !=='')" 
-                [src]="this.ASSETS + '/no-image.svg'" alt="" width="50px">
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mascota of this.misMascotas">
+        <td>
+          <img *ngIf="mascota.imagenes && mascota.imagenes.length > 0 && mascota.imagenes !==''"
+            [src]="mascota.imagenes[0]" alt="" width="50px">
+          <img *ngIf="!(mascota.imagenes && mascota.imagenes.length > 0 && mascota.imagenes !=='')"
+            [src]="this.ASSETS + '/no-image.svg'" alt="" width="50px">
 
-              </td>
-              <td>{{mascota.nombre ? mascota.nombre : '--'}}</td>
-              <td>{{mascota.sexo ? mascota.sexo : '--'}}</td>
-              <td>{{mascota.edad ? mascota.edad : '--'}}</td>
-              <td>{{(mascota.especie && mascota.especie.nombre) ? mascota.especie.nombre : '--'}}</td>
-              <td>{{(mascota.raza && mascota.raza.nombre) ? mascota.raza.nombre : '--'}}</td>
-              <td class="accion"><i class="bi bi-pen"></i></td>
-              <td class="accion" (click)="this.deleteMascota(mascota._id)"><i class="bi bi-trash3"></i></td>
-            </tr>
-          </tbody>
-    </table>
+        </td>
+        <td>{{mascota.nombre ? mascota.nombre : '--'}}</td>
+        <td>{{mascota.sexo ? mascota.sexo : '--'}}</td>
+        <td>{{mascota.edad ? mascota.edad : '--'}}</td>
+        <td>{{(mascota.especie && mascota.especie.nombre) ? mascota.especie.nombre : '--'}}</td>
+        <td>{{(mascota.raza && mascota.raza.nombre) ? mascota.raza.nombre : '--'}}</td>
+        <td class="accion" (click)="openModal(template, mascota)"><i class="bi bi-pen"></i></td>
+        <td class="accion" (click)="this.deleteMascota(mascota._id)"><i class="bi bi-trash3"></i></td>
+      </tr>
+    </tbody>
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 *ngIf="!(this.mascotaSeleccionada.nombre && this.mascotaSeleccionada.nombre !== '')"
+          class="modal-title pull-left">Editar</h4>
+        <h4 *ngIf="this.mascotaSeleccionada.nombre && this.mascotaSeleccionada.nombre !== ''"
+          class="modal-title pull-left">Editar a {{this.mascotaSeleccionada.nombre}}</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 imagenes-list">
+          <app-uploader [isEditPetView]="true" [isImgPerfil]="false" [previews]="this.mascotaSeleccionada.imagenes" (filesSelected)="onFileSelected($event)"
+          (onPreviewDeleted)="onDeleteImagenFromBack(this.mascotaSeleccionada._id,$event)"></app-uploader>
+        </div>
+        <form class="mascotas-form" [formGroup]="formGroup">
+
+          <div class="mb-3 form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" formControlName="nombre" placeholder="Escribe cómo se llama tu mascota" type="text"
+              class="form-control" autocomplete="off">
+            <div *ngIf="formGroup.get('nombre')?.hasError('required') && formGroup.get('nombre')?.touched"
+              class="error-message">
+              Campo requerido
+            </div>
+          </div>
+
+          <!-- Especie -->
+          <div class="mb-3 form-group">
+            <label for="especie">Especie</label>
+            <select id="especie" formControlName="especie" class="form-control">
+              <option value="" disabled selected>Selecciona una especie</option>
+              <option *ngFor="let especie of especies" [value]="especie._id">{{ especie.nombre }}</option>
+            </select>
+            <div *ngIf="formGroup.get('especie')?.hasError('required') && formGroup.get('especie')?.touched"
+              class="error-message">
+              Campo requerido
+            </div>
+          </div>
+
+          <!-- Raza -->
+          <div class="mb-3 form-group">
+            <label for="raza">Raza</label>
+            <select id="raza" formControlName="raza" class="form-control">
+              <option value="" disabled selected>Selecciona una raza</option>
+              <option *ngFor="let raza of razas" [value]="raza._id">{{ raza.nombre }}</option>
+            </select>
+            <div *ngIf="formGroup.get('raza')?.hasError('required') && formGroup.get('raza')?.touched"
+              class="error-message">
+              Campo requerido
+            </div>
+          </div>
+
+          <!-- Edad -->
+          <div class="mb-3 form-group">
+            <label for="edad">Edad</label>
+            <select id="edad" formControlName="edad" class="form-control">
+              <option *ngFor="let i of this.edad" [value]="i">{{ i }}</option>
+            </select>
+            <div *ngIf="formGroup.get('edad')?.hasError('required') && formGroup.get('edad')?.touched"
+              class="error-message">
+              Campo requerido
+            </div>
+          </div>
+
+
+          <!-- Sexo -->
+          <div class="mb-3 form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" formControlName="sexo" class="form-control">
+              <option value="" disabled selected>Selecciona su sexo</option>
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+              <option value="No especificado">No especificado</option>
+            </select>
+            <div *ngIf="formGroup.get('sexo')?.hasError('required') && formGroup.get('sexo')?.touched"
+              class="error-message">
+              Campo requerido
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="mb-3 form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" formControlName="descripcion"
+              placeholder="Describe cómo es su carácter, su físico..." class="form-control" rows="4"></textarea>
+            <div *ngIf="formGroup.get('descripcion')?.hasError('required') && formGroup.get('descripcion')?.touched"
+              class="error-message">
+              Campo requerido
+            </div>
+          </div>
+
+          <button (click)="onSubmit(this.mascotaSeleccionada._id)" class="btn auth-btn-custom">Submit</button>
+        </form>
+      </div>
+    </ng-template>
+  </table>
 
 </div>

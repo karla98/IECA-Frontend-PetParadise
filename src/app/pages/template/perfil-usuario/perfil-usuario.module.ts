@@ -9,7 +9,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MisMascotasComponent } from './mis-mascotas/mis-mascotas.component';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { MisMascotasComponent } from './mis-mascotas/mis-mascotas.component';
     ComponentsModule,
     TabsModule.forRoot(),
     ReactiveFormsModule,
+    ModalModule.forRoot(),
 
   ]
 })

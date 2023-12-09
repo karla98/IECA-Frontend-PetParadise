@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { lastValueFrom } from 'rxjs';
-import { UploaderComponent } from 'src/app/components/uploader/uploader.component';
 import { ApiRequestService } from 'src/app/services/api-request.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-mis-mascotas',
@@ -30,15 +30,16 @@ export class MisMascotasComponent implements OnInit {
   imagenes: File[] = [];
   formData = new FormData();
 
+  mascotaSeleccionada: any;
 
-  @ViewChild(UploaderComponent) uploaderComponent!: UploaderComponent;
-
+  modalRef?: BsModalRef;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private apiRequestService: ApiRequestService,
     private router: Router,
-    private message: ToastrService
+    private message: ToastrService,
+    private modalService: BsModalService
   ) {
     this.formGroup = this.fb.group({
       nombre: ['', [Validators.required]],
@@ -81,13 +82,48 @@ export class MisMascotasComponent implements OnInit {
   }
 
   async onFileSelected(files: File[]): Promise<void> {
+    // this.imagenes = [];
     this.imagenes = files;
+    /*
     for (const file of this.imagenes) {
       this.formData.append('imagenes', file, file.name);
     }
+    */
+
+    this.formData.append('imagenes', files[files.length - 1], files[files.length - 1].name);
+    
+
+    console.log("this.formData: ", this.formData);
   }
 
-  async onSubmit(): Promise<void> {
+
+  async onDeleteImagenFromBack(idMascota: string, imagen_url: string): Promise<void> {
+
+    console.log("Se quiere eliminar una imgen que esta en el back");
+
+    // return;
+      const formDataImagen = new FormData();
+      
+      formDataImagen.append('url', imagen_url);
+      
+      try {
+        const response = await lastValueFrom(
+          this.apiRequestService.update<any>(
+            'mascotas/deleteImagenMascota',
+            idMascota,
+            formDataImagen
+          )
+        );
+
+        if (response) {
+          this.message.success('Imagen eliminada');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  }
+  
+  async onSubmit(id: string): Promise<void> {
     if (this.formGroup.valid) {
       this.formGroup.markAllAsTouched();
       console.log('formulario válido: ', this.formGroup.valid);
@@ -100,15 +136,24 @@ export class MisMascotasComponent implements OnInit {
       this.formData.append('especie', this.formGroup.value.especie);
 
       try {
-        await lastValueFrom(
-          this.apiRequestService.createWithFile<any>('mascotas', this.formData)
+        const response = await lastValueFrom(
+          this.apiRequestService.updateWithFile<any>(
+            'mascotas',
+            id,
+            this.formData
+          )
         );
-        this.formGroup.reset();
 
-        //this.imagenes=[];
-        this.uploaderComponent.reset();
+        if (response) {
+          this.message.success('Formulario enviado correctamente');
+          this.formData = new FormData();
+          this.imagenes = [];
+          this.modalRef?.hide();
 
-        this.message.success('Formulario enviado correctamente');
+          const mascotaUpdatedIndex = this.misMascotas.findIndex((mascota) => mascota._id === id);
+          console.log("Response: ", response);
+          this.misMascotas[mascotaUpdatedIndex] = response;
+        }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -122,22 +167,34 @@ export class MisMascotasComponent implements OnInit {
       this.isLoading = true;
 
       const eliminado = await lastValueFrom(
-        this.apiRequestService.delete<any>(
-          'mascotas',
-          id
-        )
+        this.apiRequestService.delete<any>('mascotas', id)
       );
 
-      if(eliminado){
-        this.misMascotas = this.misMascotas.filter(objeto => objeto._id !== id);
+      if (eliminado) {
+        this.misMascotas = this.misMascotas.filter(
+          (objeto) => objeto._id !== id
+        );
         this.message.success('Elemento eliminado exitosamente');
-
       }
-
     } catch (e) {
       console.error(e);
     } finally {
       this.isLoading = false;
     }
+  }
+
+  openModal(template: TemplateRef<any>, mascota: any) {
+    this.formGroup.patchValue({
+      nombre: mascota.nombre,
+      especie: mascota.especie?._id,
+      raza: mascota.raza?._id,
+      edad: mascota.edad,
+      sexo: mascota.sexo,
+      descripcion: mascota.descripcion,
+    });
+
+    this.mascotaSeleccionada = mascota;
+
+    this.modalRef = this.modalService.show(template);
   }
 }

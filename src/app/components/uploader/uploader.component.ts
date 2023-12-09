@@ -8,9 +8,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class UploaderComponent implements OnInit {
   @Output() filesSelected: EventEmitter<File[]> = new EventEmitter<File[]>();
 
+  @Output() onPreviewDeleted: EventEmitter<string> = new EventEmitter<string>();
+
   @Input() isImgPerfil: boolean = false;
 
   @Input() previews: any[] = [];
+  @Input() isEditPetView: boolean = false;
   
   loadingPreviews = false;
   fileList: File[] = [];
@@ -72,12 +75,16 @@ export class UploaderComponent implements OnInit {
     });
   }
 
-  deleteImage(index: number): void {
+  deleteImage(index: number, preview: string): void {
+    console.log("preview: ", preview);
     this.previews.splice(index, 1);
     this.fileList.splice(index, 1);
     if (this.fileList.length <= this.numFiles) {
       this.numMaxFiles = false;
       this.filesSelected.emit(this.fileList);
+      if(preview && preview.includes("cloudinary")) {
+        this.onPreviewDeleted.emit(preview);
+      }
     } else {
       this.numMaxFiles = true;
       this.fileList = [];
