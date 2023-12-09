@@ -1,1 +1,56 @@
-<app-uploader [isImgPerfil]="true" [previews]="this.imagenExistentePerfil" (filesSelected)="onFileSelected($event)"></app-uploader>
+<div class="container">
+
+    <div class="row">
+        <div class="col-4">
+            <app-uploader [isImgPerfil]="true" [previews]="this.imagenExistentePerfil"
+            (onPreviewDeleted)="onDeleteImagenFromBack(this.userLogged._id,$event)" (filesSelected)="onFileSelected($event)"></app-uploader>
+
+        </div>
+        <div class="col-8">
+            <form class="mascotas-form" [formGroup]="formGroup">
+
+                <div class="mb-3 form-group">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" formControlName="nombre" placeholder="Escribe tu nombre completo" type="text"
+                        class="form-control" autocomplete="off">
+                    <div *ngIf="formGroup.get('nombre')?.hasError('required') && formGroup.get('nombre')?.touched"
+                        class="error-message">
+                        Campo requerido
+                    </div>
+                </div>
+
+                <div class="mb-3 form-group">
+                    <i class="bi bi-envelope form-control-feedback"></i>
+                    <input id="email" formControlName="email" placeholder="Email" type="email" class="form-control"
+                        autocomplete="off">
+                    <div *ngIf="formGroup.get('email')?.hasError('required') && formGroup.get('email')?.touched"
+                        class="error-message">
+                        Campo requerido
+                    </div>
+                    <div *ngIf="formGroup.get('email')?.hasError('email')" class="error-message">
+                        Email con formato inválido
+                    </div>
+                </div>
+
+                <!--
+                <div class="mb-3 form-group">
+                    <i class="bi bi-lock form-control-feedback"></i>
+                    <input id="password" formControlName="password" placeholder="Escribe tu nueva contraseña (Solo si deseas modificarla)" type="password" class="form-control" autocomplete="off">
+                    <div *ngIf="formGroup.get('password')?.hasError('required') && formGroup.get('password')?.touched" class="error-message">
+                        Campo requerido
+                    </div>
+                    <div *ngIf="formGroup.get('password')?.hasError('minlength')" class="error-message">
+                        La contraseña debe contener al menos 8 caracteres
+                    </div>
+                </div>
+                -->
+
+
+
+
+                <button (click)="onSubmit(this.userLogged._id)" class="btn auth-btn-custom">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
