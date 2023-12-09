@@ -19,7 +19,10 @@
                 <h2>{{ (this.mascota && this.mascota.nombre !== '') ? this.mascota.nombre :'Detalle de Mascota'}}</h2>
                 <p>{{this.mascota.descripcion ? this.mascota.descripcion : 'No hay descripción'}}</p>
                 <span><strong>Sexo: </strong> {{this.mascota.sexo ? this.mascota.sexo : '--'}}</span>
-                <span><strong>Edad: </strong> {{this.mascota.edad ? this.mascota.edad : '--'}}</span>
+                <span><strong>Edad (años): </strong> {{this.mascota.edad ? this.mascota.edad : 0}}</span>
+                <span><strong>Especie: </strong> {{(this.mascota.especie && this.mascota.especie.nombre) ? this.mascota.especie.nombre : 'No especificado'}}</span>
+                <span><strong>Raza: </strong> {{(this.mascota.raza && this.mascota.raza.nombre) ? this.mascota.raza.nombre : 'No especificado'}}</span>
+
 
             </div>
 

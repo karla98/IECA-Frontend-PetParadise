@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="details-mascota" (click)="this.goToMascotaDetail(mascota?._id)">
-                        <p> <strong>Edad:</strong>{{mascota?.edad ? mascota?.edad : '--'}} </p>
+                        <p> <strong>Edad (años):</strong>{{mascota?.edad ? mascota?.edad : 0}} </p>
                         <p class="description"> <strong>Descripción:</strong>{{mascota?.descripcion ? mascota?.descripcion : '--'}}
                         </p>
                     </div>
