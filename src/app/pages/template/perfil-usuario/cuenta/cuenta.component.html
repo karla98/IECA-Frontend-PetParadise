@@ -10,7 +10,7 @@
             <form class="mascotas-form" [formGroup]="formGroup">
 
                 <div class="mb-3 form-group">
-                    <label for="nombre">Nombre</label>
+                    <i class="bi bi-person form-control-feedback"></i>
                     <input id="nombre" formControlName="nombre" placeholder="Escribe tu nombre completo" type="text"
                         class="form-control" autocomplete="off">
                     <div *ngIf="formGroup.get('nombre')?.hasError('required') && formGroup.get('nombre')?.touched"
