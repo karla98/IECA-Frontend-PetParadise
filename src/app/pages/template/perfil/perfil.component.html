@@ -1,3 +1,17 @@
+<div class="modals" *ngIf="modal === true">
+    <div class="modal_content w-50">
+        <br>
+        <p class="fs-6 text-center">Agrega un Post</p>
+        <form [formGroup]="formgroup">
+            <app-uploader (filesSelected)="onFileSelected($event)"></app-uploader>
+            <textarea class="textarea" id="descripcion" formControlName="descripcion" name="descripcion"></textarea><br>
+            <div class="w-100 d-flex">
+                <button (click)="SendData()" class="btn btn-primary m-auto d-block">Crear Post</button>
+                <button (click)="CloseModal()" class="btn btn-danger m-auto d-block">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div id="PerfilPage" class="container-fluid pagina-general">
     <section class="seccion-perfil-usuario">
         <div class="perfil-usuario-header">
@@ -6,22 +20,23 @@
                     <img [src]="this.userLogged.imagen" class="img-avatar">
                     <app-up-profile-loader [isImgPerfil]="true"
                         (filesSelected)="onFileSelected($event)"></app-up-profile-loader>
-
                 </div>
             </div>
         </div>
+
         <div class="perfil-usuario-body">
             <div class="perfil-usuario-bio">
-                <h3 class="titulo">{{ userLogged['nombre']}}</h3>
-                <p>Email: {{ userLogged['email']}}</p>
+                <div class="w-75 m-auto">
+                    <h3 class="titulo">{{ userLogged['nombre']}}</h3>
+                    <p>Email: {{ userLogged['email']}}</p>
+                </div>
+                <button class="float-end btn btn-success m-auto" (click)="OpenModal()">Nuevo Post</button>
             </div>
-            <div class="perfil-usuario-footer">
-                <div class="lista-datos">
-                    <form action="">
-                        <textarea name="nota" id="nota" cols="80" placeholder="Describe el momento"></textarea>
-                        <app-uploader [isImgPerfil]="false" (filesSelected)="onFileSelected($event)"></app-uploader>
-                        <button type="submit">Publicar</button>
-                    </form>
+            <div class="feed">
+                <div class="Post" *ngFor="let item of posts">
+                    <br>
+                    <p class="fs-6  p-2 mx-3" style="word-wrap: break-word;">{{item.descripcion}}</p>
+                    <img [src]="item.imagen"  alt="" class="imagen-post"><br>
                 </div>
             </div>
         </div>

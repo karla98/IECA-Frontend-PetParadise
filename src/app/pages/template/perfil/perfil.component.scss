@@ -13,7 +13,31 @@
     background: linear-gradient(#C96928, transparent);
     margin-bottom: 1.25rem;
 }
-
+.modals{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+.modal_content{
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px silver;
+    padding: 8px;
+    margin: auto;
+    margin-top: 12%;
+}
+.textarea{
+    width: 90%;
+    margin: auto;
+    display: block;
+    padding: 10px;
+    height: 100px;
+    background: rgb(231,231,231);
+    border-radius: 10px;
+}
 .seccion-perfil-usuario .perfil-usuario-portada {
     display: block;
     position: relative;
@@ -117,3 +141,23 @@
     padding: 5px 0;
 }
 
+.feed{
+    width: 90%;
+    margin: 5% auto auto auto;
+}
+
+.Post{
+    width: 80%;
+    margin: auto;
+    border: 1px solid silver;
+    margin-top: 2%;
+    background: white;
+    border-radius: 12px;
+}
+.imagen-post{
+    width: 300px;
+    height: 300px;
+    padding: 12px;
+    display: block;
+    margin: auto;
+}

@@ -15,6 +15,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
 import { MascotaDetailComponent } from './mascota-detail/mascota-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MascotaDetailComponent } from './mascota-detail/mascota-detail.componen
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TemplateModule { }

@@ -1,3 +1,17 @@
+<div class="modals" *ngIf="modal === true">
+    <div class="modal_content w-50">
+        <br>
+        <p class="fs-6 text-center">Agrega un Post</p>
+        <form [formGroup]="formgroup2">
+            <app-uploader (filesSelected)="onFileSelected2($event)"></app-uploader>
+            <textarea class="textarea" id="descripcion" formControlName="descripcion" name="descripcion"></textarea><br>
+            <div class="w-100 d-flex">
+                <button (click)="SendData()" class="btn btn-primary m-auto d-block">Crear Post</button>
+                <button (click)="CloseModal()" class="btn btn-danger m-auto d-block">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="container">
 
     <div class="row">
@@ -50,7 +64,15 @@
 
                 <button (click)="onSubmit(this.userLogged._id)" class="btn auth-btn-custom">Submit</button>
             </form>
+            <button class="btn btn-success" (click)="OpenModal()">Agregar Post</button>
         </div>
 
+    </div>
+</div>
+<div class="feed">
+    <div class="Post" *ngFor="let item of posts">
+        <br>
+        <p class="fs-6  p-2 mx-3" style="word-wrap: break-word;">{{item.descripcion}}</p>
+        <img [src]="item.imagen"  alt="" class="imagen-post"><br>
     </div>
 </div>

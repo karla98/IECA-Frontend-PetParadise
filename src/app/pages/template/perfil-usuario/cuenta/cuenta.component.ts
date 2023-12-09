@@ -19,13 +19,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CuentaComponent implements OnInit {
   //formulario: FormGroup;
-
+  formgroup2! :FormGroup;
   ASSETS = environment.ASSET_URL;
   isLoading: boolean = true;
-
+  iduser: any = null;
+  modal:boolean = false;
+  file:File[] = [];
   isAuthenticated = false;
   userLogged: any = null;
-
+  posts:any[] = [];
   formGroup!: FormGroup;
 
   imagenExistentePerfil: any[] = [];
@@ -34,13 +36,33 @@ export class CuentaComponent implements OnInit {
     private message: ToastrService,
     private zone: NgZone,
     private auth: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private formb:FormBuilder
   ) {
     this.formGroup = this.fb.group({
       nombre: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.minLength(8)]],
     });
+    this.formgroup2 = formb.group({
+      descripcion:['', [Validators.required]]
+    })
+  }
+
+  OpenModal():void{
+    this.modal = true;
+  }
+
+  onFileSelected2(files: File[]): void {
+    this.file = files;
+  }
+  CloseModal():void
+  {
+      this.modal = false;
+      this.file = [];
+      this.formgroup2.patchValue({
+        descripcion:null
+      })
   }
 
   async ngOnInit(): Promise<void> {
@@ -62,6 +84,8 @@ export class CuentaComponent implements OnInit {
             // password: this.userLogged.password,
           });
         }
+        this.iduser = this.userLogged._id;
+        this.LoadData();
       } catch (e) {
       } finally {
       }
@@ -143,6 +167,54 @@ export class CuentaComponent implements OnInit {
       }
     } catch (error) {
       console.error('Error:', error);
+    }
+  }
+
+  async SendData():Promise<void>{
+    const formData = new FormData();
+    for (const file of this.file) {
+      formData.append('imagen', file, file.name);
+      formData.append("descripcion", this.formgroup2.value.descripcion);
+    }
+
+    if (this.file && this.file.length > 0) {
+      try {
+        const res = await lastValueFrom(
+          this.apiRequestService.createWithFile<any>('post', formData)
+        );
+        this.message.success("Post Creado con exito");
+        this.modal = false;
+        this.formgroup2.patchValue({
+          descripcion:null
+        })
+      } catch (error) {
+        console.error('Error al cargar imágenes:', error);
+
+        // Muestra el mensaje de error dentro de la zona de Angular
+        this.zone.run(() => {
+          this.message.error('Error al cargar imágenes');
+        });
+      }
+    }
+  }
+
+  async LoadData():Promise<void>{
+    try{
+      this.apiRequestService.getOne<any>('post', this.iduser ).subscribe(
+        (data) => {
+          console.log('Datos obtenidos:', data);
+          this.posts = data; // Asigna los datos a la propiedad post del componente
+
+        },
+        (error) => {
+          console.error('Error al obtener datos:', error);
+          // Maneja errores según tus necesidades
+        }
+      );
+    }
+    catch(err)
+    {
+      this.message.error("error");
     }
   }
 }
